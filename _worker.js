@@ -1,15 +1,11 @@
-// @ts-ignore
-
-let tg_host = "api.telegram.org";
-
-tg_host = env.domain || tg_host;
+// @ts-nocheck
 
 addEventListener('fetch', event => {
     event.respondWith(handleRequest(event.request))
 })
 async function handleRequest(request) {
     var u = new URL(request.url);
-    u.host = tg_host;
+    u.host = 'api.telegram.org';
     var req = new Request(u, {
         method: request.method,
         headers: request.headers,
