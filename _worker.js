@@ -1,16 +1,23 @@
-let domain = "api.telegram.org";
-domain = env.domain || domain;
+let Reverse_url = 'https://api.telegram.org';
+Reverse_url = env.Reverse_url || Reverse_url;
+
 addEventListener('fetch', event => {
-    event.respondWith(handleRequest(event.request))
+  event.respondWith(handleRequest(event.request))
 })
+
 async function handleRequest(request) {
-    var u = new URL(request.url);
-    u.host = domain;
-    var req = new Request(u, {
-        method: request.method,
-        headers: request.headers,
-        body: request.body
-    });
-    const result = await fetch(req);
-    return result;
+  const url = new URL(request.url);
+  const headers_Origin = request.headers.get("Access-Control-Allow-Origin") || "*"
+  url.host = Reverse_url.replace(/^https?:\/\//, '');
+  const modifiedRequest = new Request(url.toString(), {
+    headers: request.headers,
+    method: request.method,
+    body: request.body,
+    redirect: 'follow'
+  });
+  const response = await fetch(modifiedRequest);
+  const modifiedResponse = new Response(response.body, response);
+  // 添加允许跨域访问的响应头
+  modifiedResponse.headers.set('Access-Control-Allow-Origin', headers_Origin);
+  return modifiedResponse;
 }
