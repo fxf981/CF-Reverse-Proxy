@@ -1,5 +1,5 @@
-let Reverse_url = 'https://api.telegram.org';
-Reverse_url = env.Reverse_url || Reverse_url;
+const Reverse_url = 'https://api.telegram.org';
+// Reverse_url = env.Reverse_url || Reverse_url;
 
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request))
