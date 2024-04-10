@@ -1,2 +1,2 @@
 name = "tgpush"
-main = "_worker.js"
+pages_build_output_dir = "./dist"
