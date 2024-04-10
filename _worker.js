@@ -8,8 +8,7 @@
  * Learn more at https://developers.cloudflare.com/pages/
  */
 
-let tg_host = "api.telegram.org";
-tg_host = env.host || tg_host;
+const tg_host = "api.telegram.org";
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
