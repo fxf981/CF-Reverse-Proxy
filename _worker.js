@@ -8,11 +8,11 @@
  * Learn more at https://developers.cloudflare.com/pages/
  */
 
-// const tg_host = "api.telegram.org";
+// const host = "api.telegram.org";
 // export default {
 //   async fetch(request, env, ctx) {
 //     const url = new URL(request.url);
-//     url.host = tg_host;
+//     url.host = host;
 
 //     const proxyRequest = new Request(url, {
 //       method: request.method,
@@ -37,9 +37,9 @@
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    const tg_host = url.searchParams.get('tg_host') || 'api.telegram.org';
+    const host = url.searchParams.get('host') || 'api.telegram.org';
 
-    const proxyRequest = new Request(`https://${tg_host}${url.pathname}`, {
+    const proxyRequest = new Request(`https://${host}${url.pathname}`, {
       method: request.method,
       headers: request.headers,
       body: request.body,
