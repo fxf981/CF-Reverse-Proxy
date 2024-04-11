@@ -34,12 +34,33 @@
  * Learn more at https://developers.cloudflare.com/pages/
  */
 
+// export default {
+//   async fetch(request, env, ctx) {
+//     const url = new URL(request.url);
+//     const host = url.searchParams.get('host') || 'api.telegram.org';
+
+//     const proxyRequest = new Request(`https://${host}${url.pathname}`, {
+//       method: request.method,
+//       headers: request.headers,
+//       body: request.body,
+//     });
+
+//     const result = await fetch(proxyRequest);
+//     return result;
+//   },
+// };
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    const host = url.searchParams.get('host') || 'api.telegram.org';
 
-    const proxyRequest = new Request(`https://${host}${url.pathname}`, {
+    // 从 URL 路径中提取主机信息
+    const [, host, ...rest] = url.pathname.split('/');
+
+    // 重新构建请求 URL
+    const proxyUrl = new URL(`https://${host}/${rest.join('/')}`);
+    proxyUrl.search = url.search;
+
+    const proxyRequest = new Request(proxyUrl, {
       method: request.method,
       headers: request.headers,
       body: request.body,
