@@ -57,7 +57,7 @@ export default {
     const [, host, ...rest] = url.pathname.split('/');
 
     // 重新构建请求 URL
-    const proxyUrl = new URL(`https://${host}/${rest.join('/')}`);
+    const proxyUrl = new URL(`${host}/${rest.join('/')}`);
     proxyUrl.search = url.search;
 
     const proxyRequest = new Request(proxyUrl, {
