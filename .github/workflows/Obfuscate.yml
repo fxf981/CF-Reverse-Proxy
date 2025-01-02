@@ -3,7 +3,7 @@ name: Obfuscate and Commit
 on:
     push:
        paths:
-           - '_worker_copy.js'
+           - '_worker copy.js'
     workflow_dispatch:
 
 jobs:
