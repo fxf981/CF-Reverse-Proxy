@@ -27,7 +27,7 @@ jobs:
 
       - name: Obfuscate code
         run: |
-          javascript-obfuscator _worker_copy.js --output _worker.js \
+          javascript-obfuscator _worker copy.js --output _worker.js \
           --compact true \
           --control-flow-flattening true \
           --control-flow-flattening-threshold 1 \
